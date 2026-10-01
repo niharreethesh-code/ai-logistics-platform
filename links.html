@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Running Platform Links</title>
+  <style>
+    :root {
+      --bg: #0b1120;
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --border: rgba(148, 163, 184, 0.15);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.25);
+      --success: #34d399;
+      --success-glow: rgba(52, 211, 153, 0.2);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.12) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.15) 0px, transparent 50%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 900px;
+      width: 100%;
+    }
+    header {
+      margin-bottom: 32px;
+      text-align: center;
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      background: var(--success-glow);
+      color: var(--success);
+      border: 1px solid rgba(52, 211, 153, 0.4);
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 10px var(--success);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.15); }
+    }
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    p.subtitle {
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      backdrop-filter: blur(12px);
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(56, 189, 248, 0.4);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    }
+    .card-primary {
+      grid-column: 1 / -1;
+      border-color: rgba(56, 189, 248, 0.5);
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.8) 100%);
+      box-shadow: 0 8px 32px var(--accent-glow);
+    }
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .card-desc {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: #0284c7;
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);
+    }
+    .btn-primary:hover {
+      background: #0369a1;
+      box-shadow: 0 6px 20px rgba(2, 132, 199, 0.6);
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+    .url-chip {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 12px;
+      color: var(--accent);
+      background: rgba(56, 189, 248, 0.1);
+      padding: 4px 8px;
+      border-radius: 6px;
+      word-break: break-all;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="status-badge">
+        <span class="status-dot"></span>
+        Services Active & Running (HTTP 200)
+      </div>
+      <h1>AI-Driven Multi-Modal Rural Logistics Platform</h1>
+      <p class="subtitle">Click any link below to open the live system components in your browser.</p>
+    </header>
+
+    <div class="grid">
+      <!-- Main Frontend Dashboard -->
+      <div class="card card-primary">
+        <div>
+          <div class="card-title">🖥️ Interactive Web Dashboard (Frontend)</div>
+          <div class="url-chip">http://localhost:5173/</div>
+          <p class="card-desc">
+            Complete Command Operations Center featuring the ML Risk Simulator, Dynamic Mode Recommendation Engine, Case-Study Switcher (Himalayas, Brahmaputra, Thar Desert), Village Isolation Registry, and Disaster SOS Agency Console.
+          </p>
+        </div>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <a class="btn btn-primary" href="http://localhost:5173/" target="_blank">Launch Dashboard (localhost) →</a>
+          <a class="btn btn-secondary" href="http://192.168.1.10:5173/" target="_blank">Open LAN / Network URL</a>
+        </div>
+      </div>
+
+      <!-- Backend Server & Health -->
+      <div class="card">
+        <div>
+          <div class="card-title">⚙️ Backend API Server</div>
+          <div class="url-chip">http://localhost:5050/</div>
+          <p class="card-desc">Express API gateway with route catalog and service telemetry.</p>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <a class="btn btn-secondary" href="http://localhost:5050/" target="_blank">API Root</a>
+          <a class="btn btn-secondary" href="http://localhost:5050/health" target="_blank">Health Check</a>
+        </div>
+      </div>
+
+      <!-- Case Study Corridors -->
+      <div class="card">
+        <div>
+          <div class="card-title">🏔️ Corridors API (Obj 06)</div>
+          <div class="url-chip">http://localhost:5050/api/corridors</div>
+          <p class="card-desc">Empirical case study corridors across mountainous, delta, and desert frontiers.</p>
+        </div>
+        <a class="btn btn-secondary" href="http://localhost:5050/api/corridors" target="_blank">View Corridors JSON →</a>
+      </div>
+
+      <!-- Multimodal Modes -->
+      <div class="card">
+        <div>
+          <div class="card-title">🚁 Multimodal Transport (Obj 01)</div>
+          <div class="url-chip">http://localhost:5050/api/multimodal/modes</div>
+          <p class="card-desc">Unified schema for Road, Rail, Inland Waterway, and Emergency Cargo Drone modes.</p>
+        </div>
+        <a class="btn btn-secondary" href="http://localhost:5050/api/multimodal/modes" target="_blank">View Modes JSON →</a>
+      </div>
+
+      <!-- Remote Village Registry -->
+      <div class="card">
+        <div>
+          <div class="card-title">📍 Village Registry (Obj 03)</div>
+          <div class="url-chip">http://localhost:5050/api/villages</div>
+          <p class="card-desc">Accessibility scores, seasonal isolation index, and border post coordinates.</p>
+        </div>
+        <a class="btn btn-secondary" href="http://localhost:5050/api/villages" target="_blank">View Villages JSON →</a>
+      </div>
+
+      <!-- Risk Assessment -->
+      <div class="card">
+        <div>
+          <div class="card-title">⚠️ ML Risk Model (Obj 02)</div>
+          <div class="url-chip">http://localhost:5050/api/risk/assessment</div>
+          <p class="card-desc">Disruption probability predictions combining weather, elevation, and terrain.</p>
+        </div>
+        <a class="btn btn-secondary" href="http://localhost:5050/api/risk/assessment" target="_blank">View Risk JSON →</a>
+      </div>
+
+      <!-- Active Routing -->
+      <div class="card">
+        <div>
+          <div class="card-title">🛣️ Active Transit Routing (Obj 04)</div>
+          <div class="url-chip">http://localhost:5050/api/routing/active</div>
+          <p class="card-desc">Real-time dispatch route telemetry, status tracking, and waypoint telemetry.</p>
+        </div>
+        <a class="btn btn-secondary" href="http://localhost:5050/api/routing/active" target="_blank">View Active Routes →</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

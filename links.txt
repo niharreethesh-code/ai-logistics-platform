@@ -1,0 +1,36 @@
+=============================================================================
+  AI-DRIVEN MULTI-MODAL RURAL LOGISTICS & DISASTER MANAGEMENT PLATFORM
+  LIVE RUNNING SYSTEM LINKS (Verified Active - HTTP 200 OK)
+=============================================================================
+
+1. FRONTEND USER INTERFACE & INTERACTIVE DASHBOARD
+   - Local Browser URL:    http://localhost:5173/
+   - Network / LAN URL:    http://192.168.1.10:5173/
+   (Features: Central Ops Center, ML Risk Simulator, Case-Study Switcher,
+    Village Isolation Matrix, Disaster SOS Mode & UAV Air-Drop Controls)
+
+2. BACKEND API SERVER & STATUS
+   - API Root Directory:   http://localhost:5050/
+   - System Health Check:  http://localhost:5050/health
+
+3. CORE OBJECTIVE API ENDPOINTS
+   - Case-Study Corridors (Obj 06):
+     http://localhost:5050/api/corridors
+     (Himalayan Pass, Brahmaputra Riverine Delta, Thar Desert Frontier)
+
+   - Multi-Modal Transport Modes (Obj 01 & 04):
+     http://localhost:5050/api/multimodal/modes
+
+   - Remote Village & Border Outpost Registry (Obj 03):
+     http://localhost:5050/api/villages
+
+   - Disruption Risk Assessment Engine (Obj 02):
+     http://localhost:5050/api/risk/assessment
+
+   - Active Transit & Route Optimization (Obj 04):
+     http://localhost:5050/api/routing/active
+
+=============================================================================
+Both the Backend Server (:5050) and Vite Frontend (:5173) are actively
+running in the background. You can open any link above in your web browser.
+=============================================================================
