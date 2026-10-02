@@ -246,82 +246,96 @@
     </header>
 
     <div class="grid">
-      <!-- Main Frontend Dashboard -->
+      <!-- 3-WAY APP PAGES (FEATURED) -->
       <div class="card card-primary">
         <div>
-          <div class="card-title">🖥️ Interactive Web Dashboard (Frontend)</div>
-          <div class="url-chip">http://localhost:5173/</div>
+          <div class="card-title">🖥️ 1. Unified Dashboard (All 6 Objectives)</div>
+          <div class="url-chip">http://localhost:5173/#dashboard</div>
           <p class="card-desc">
-            Complete Command Operations Center featuring the ML Risk Simulator, Dynamic Mode Recommendation Engine, Case-Study Switcher (Himalayas, Brahmaputra, Thar Desert), Village Isolation Registry, and Disaster SOS Agency Console.
+            Central command HUD featuring all 6 project objectives in order: Multi-Modal schema, ML Risk Simulator, Village Accessibility Scoring, AI Mode Recommendation Engine, Disaster SOS Center, and Case-Study Switcher.
           </p>
         </div>
-        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-          <a class="btn btn-primary" href="http://localhost:5173/" target="_blank">Launch Dashboard (localhost) →</a>
-          <a class="btn btn-secondary" href="http://192.168.1.10:5173/" target="_blank">Open LAN / Network URL</a>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <a class="btn btn-primary" href="http://localhost:5173/#dashboard" target="_blank">Open Dashboard →</a>
+          <a class="btn btn-secondary" href="http://192.168.1.10:5173/#dashboard" target="_blank">LAN URL</a>
         </div>
       </div>
 
-      <!-- Backend Server & Health -->
-      <div class="card">
+      <div class="card card-primary" style="background: linear-gradient(135deg, rgba(2, 132, 199, 0.25) 0%, rgba(99, 102, 241, 0.2) 100%);">
         <div>
-          <div class="card-title">⚙️ Backend API Server</div>
-          <div class="url-chip">http://localhost:5050/</div>
-          <p class="card-desc">Express API gateway with route catalog and service telemetry.</p>
+          <div class="card-title">🧠 2. ML Route-Level Disruption Risk Engine</div>
+          <div class="url-chip">http://localhost:5173/#risk-engine</div>
+          <p class="card-desc">
+            Dedicated drag-and-drop coordinate sandbox. Drag locations or click anywhere on the GIS map to place coordinates. Automatically analyzes elevation profiles, slope gradients, and disruption risks, then implements the most efficient multi-modal approach.
+          </p>
         </div>
-        <div style="display: flex; gap: 8px;">
-          <a class="btn btn-secondary" href="http://localhost:5050/" target="_blank">API Root</a>
-          <a class="btn btn-secondary" href="http://localhost:5050/health" target="_blank">Health Check</a>
-        </div>
+        <a class="btn btn-primary" href="http://localhost:5173/#risk-engine" target="_blank">Launch Drag & Drop Risk Engine →</a>
       </div>
 
-      <!-- Case Study Corridors -->
-      <div class="card">
+      <div class="card card-primary" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(2, 132, 199, 0.2) 100%);">
         <div>
-          <div class="card-title">🏔️ Corridors API (Obj 06)</div>
-          <div class="url-chip">http://localhost:5050/api/corridors</div>
-          <p class="card-desc">Empirical case study corridors across mountainous, delta, and desert frontiers.</p>
+          <div class="card-title">💬 3. Platform Helpdesk & Doubts Knowledge Center</div>
+          <div class="url-chip">http://localhost:5173/#helpdesk</div>
+          <p class="card-desc">
+            Interactive Helpdesk where students, faculty evaluators, and disaster relief planners can ask any doubts. Features AI-powered instant doubt resolution, formula references, and interactive Q&A submission.
+          </p>
         </div>
-        <a class="btn btn-secondary" href="http://localhost:5050/api/corridors" target="_blank">View Corridors JSON →</a>
+        <a class="btn btn-primary" href="http://localhost:5173/#helpdesk" target="_blank">Open Helpdesk & Doubts Center →</a>
       </div>
 
-      <!-- Multimodal Modes -->
+      <!-- ALL 6 OBJECTIVES IN EXACT ORDER (01 to 06) -->
       <div class="card">
         <div>
-          <div class="card-title">🚁 Multimodal Transport (Obj 01)</div>
+          <div class="card-title">🔄 Obj 01: Unified Multi-Modal Data Model</div>
           <div class="url-chip">http://localhost:5050/api/multimodal/modes</div>
-          <p class="card-desc">Unified schema for Road, Rail, Inland Waterway, and Emergency Cargo Drone modes.</p>
+          <p class="card-desc">Unified schema combining Road, Rail, Inland Waterway, and Emergency Cargo Drone modes.</p>
         </div>
         <a class="btn btn-secondary" href="http://localhost:5050/api/multimodal/modes" target="_blank">View Modes JSON →</a>
       </div>
 
-      <!-- Remote Village Registry -->
       <div class="card">
         <div>
-          <div class="card-title">📍 Village Registry (Obj 03)</div>
-          <div class="url-chip">http://localhost:5050/api/villages</div>
-          <p class="card-desc">Accessibility scores, seasonal isolation index, and border post coordinates.</p>
-        </div>
-        <a class="btn btn-secondary" href="http://localhost:5050/api/villages" target="_blank">View Villages JSON →</a>
-      </div>
-
-      <!-- Risk Assessment -->
-      <div class="card">
-        <div>
-          <div class="card-title">⚠️ ML Risk Model (Obj 02)</div>
+          <div class="card-title">🧠 Obj 02: ML Disruption Risk Model</div>
           <div class="url-chip">http://localhost:5050/api/risk/assessment</div>
-          <p class="card-desc">Disruption probability predictions combining weather, elevation, and terrain.</p>
+          <p class="card-desc">Predictive model combining live weather, elevation slope, and historical cutoffs.</p>
         </div>
         <a class="btn btn-secondary" href="http://localhost:5050/api/risk/assessment" target="_blank">View Risk JSON →</a>
       </div>
 
-      <!-- Active Routing -->
       <div class="card">
         <div>
-          <div class="card-title">🛣️ Active Transit Routing (Obj 04)</div>
-          <div class="url-chip">http://localhost:5050/api/routing/active</div>
-          <p class="card-desc">Real-time dispatch route telemetry, status tracking, and waypoint telemetry.</p>
+          <div class="card-title">🏘️ Obj 03: Village Accessibility Scoring</div>
+          <div class="url-chip">http://localhost:5050/api/villages</div>
+          <p class="card-desc">Accessibility scores, seasonal isolation window (days/yr), and border post filters.</p>
         </div>
-        <a class="btn btn-secondary" href="http://localhost:5050/api/routing/active" target="_blank">View Active Routes →</a>
+        <a class="btn btn-secondary" href="http://localhost:5050/api/villages" target="_blank">View Villages JSON →</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <div class="card-title">🎯 Obj 04: AI Route & Mode Recommendation</div>
+          <div class="url-chip">http://localhost:5050/api/multimodal/recommend</div>
+          <p class="card-desc">Autonomous decision engine recommending optimal transport mode and risk mitigation protocols.</p>
+        </div>
+        <a class="btn btn-secondary" href="http://localhost:5050/api/routing/active" target="_blank">View Routing API →</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <div class="card-title">🚨 Obj 05: Planner Dashboard & Agency Alerts</div>
+          <div class="url-chip">http://localhost:5050/health</div>
+          <p class="card-desc">Crisis management console with real-time SOS queue and emergency UAV air-drops.</p>
+        </div>
+        <a class="btn btn-secondary" href="http://localhost:5050/health" target="_blank">View System Health →</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <div class="card-title">🏔️ Obj 06: Contrasting Case-Study Corridors</div>
+          <div class="url-chip">http://localhost:5050/api/corridors</div>
+          <p class="card-desc">Validation across Himalayan Alpine Pass, Brahmaputra Riverine Delta, and Thar Desert.</p>
+        </div>
+        <a class="btn btn-secondary" href="http://localhost:5050/api/corridors" target="_blank">View Corridors JSON →</a>
       </div>
     </div>
   </div>

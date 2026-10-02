@@ -1,36 +1,51 @@
 =============================================================================
   AI-DRIVEN MULTI-MODAL RURAL LOGISTICS & DISASTER MANAGEMENT PLATFORM
-  LIVE RUNNING SYSTEM LINKS (Verified Active - HTTP 200 OK)
+  LIVE RUNNING SYSTEM LINKS & THREE-WAY NAVIGATION (HTTP 200 OK)
 =============================================================================
 
-1. FRONTEND USER INTERFACE & INTERACTIVE DASHBOARD
-   - Local Browser URL:    http://localhost:5173/
-   - Network / LAN URL:    http://192.168.1.10:5173/
-   (Features: Central Ops Center, ML Risk Simulator, Case-Study Switcher,
-    Village Isolation Matrix, Disaster SOS Mode & UAV Air-Drop Controls)
+1. THREE-WAY APPLICATION PAGES (FRONTEND :5173)
+   -------------------------------------------------------------------------
+   [Page 1] Unified Command Dashboard (All 6 Objectives in Order):
+            http://localhost:5173/#dashboard
+            (Features: 01. Multi-Modal Models, 02. ML Disruption Risk, 
+             03. Village Accessibility, 04. AI Mode Recommendation, 
+             05. Disaster Agency Alerts, 06. Contrasting Corridors)
+
+   [Page 2] ML Route-Level Disruption Risk Engine (Drag & Drop Sandbox):
+            http://localhost:5173/#risk-engine
+            (Features: Drag & drop coordinate pins, automated terrain & 
+             weather stats analysis, and implementation of efficient approach)
+
+   [Page 3] Platform Helpdesk & Doubts Knowledge Center:
+            http://localhost:5173/#helpdesk
+            (Features: Ask-a-doubt AI assistant, formula references, 
+             curriculum FAQ for NCET Dept of CSE Mini Project 22CSP57)
 
 2. BACKEND API SERVER & STATUS
+   -------------------------------------------------------------------------
    - API Root Directory:   http://localhost:5050/
    - System Health Check:  http://localhost:5050/health
 
-3. CORE OBJECTIVE API ENDPOINTS
-   - Case-Study Corridors (Obj 06):
-     http://localhost:5050/api/corridors
-     (Himalayan Pass, Brahmaputra Riverine Delta, Thar Desert Frontier)
-
-   - Multi-Modal Transport Modes (Obj 01 & 04):
+3. ALL 6 OBJECTIVES IN ORDER (API DIRECTORY)
+   -------------------------------------------------------------------------
+   - Objective 01: Unified Multi-Modal Transport Model (Road, Rail, Barge, UAV)
      http://localhost:5050/api/multimodal/modes
 
-   - Remote Village & Border Outpost Registry (Obj 03):
-     http://localhost:5050/api/villages
-
-   - Disruption Risk Assessment Engine (Obj 02):
+   - Objective 02: ML Route-Level Disruption Risk Predictor
      http://localhost:5050/api/risk/assessment
 
-   - Active Transit & Route Optimization (Obj 04):
+   - Objective 03: Remote Village & Border Outpost Accessibility Scoring
+     http://localhost:5050/api/villages
+
+   - Objective 04: AI-Driven Risk-Aware Route & Mode Recommendation Engine
+     http://localhost:5050/api/multimodal/recommend
+
+   - Objective 05: Planner Dashboard & Disaster Management Agency Alerts
      http://localhost:5050/api/routing/active
 
+   - Objective 06: Contrasting Case-Study Corridors (Himalayas, Delta, Desert)
+     http://localhost:5050/api/corridors
+
 =============================================================================
-Both the Backend Server (:5050) and Vite Frontend (:5173) are actively
-running in the background. You can open any link above in your web browser.
+Both Backend (:5050) and Frontend (:5173) are active and verified.
 =============================================================================
