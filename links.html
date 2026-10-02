@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Live Running Platform Links</title>
   <style>
-    :root {
+    :root,
+    [data-theme='dark'] {
       --bg: #0b1120;
       --card-bg: rgba(30, 41, 59, 0.7);
       --border: rgba(148, 163, 184, 0.15);
@@ -15,6 +16,17 @@
       --accent-glow: rgba(56, 189, 248, 0.25);
       --success: #34d399;
       --success-glow: rgba(52, 211, 153, 0.2);
+    }
+    [data-theme='light'] {
+      --bg: #f8fafc;
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --border: rgba(203, 213, 225, 0.85);
+      --text: #0f172a;
+      --text-muted: #475569;
+      --accent: #0284c7;
+      --accent-glow: rgba(2, 132, 199, 0.15);
+      --success: #059669;
+      --success-glow: rgba(5, 150, 105, 0.15);
     }
     * {
       box-sizing: border-box;
@@ -166,10 +178,64 @@
       margin-bottom: 12px;
       display: inline-block;
     }
+    .top-nav {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+      margin-bottom: 16px;
+    }
+    .theme-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.25s ease;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .theme-toggle-btn:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+    [data-theme='light'] body {
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(2, 132, 199, 0.08) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.08) 0px, transparent 50%);
+    }
+    [data-theme='light'] h1 {
+      background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    [data-theme='light'] .card-primary {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(241, 245, 249, 0.9) 100%);
+      border-color: rgba(2, 132, 199, 0.35);
+      box-shadow: 0 8px 30px rgba(2, 132, 199, 0.1);
+    }
+    [data-theme='light'] .btn-secondary {
+      background: rgba(15, 23, 42, 0.06);
+      color: #0f172a;
+      border: 1px solid var(--border);
+    }
+    [data-theme='light'] .btn-secondary:hover {
+      background: rgba(15, 23, 42, 0.12);
+    }
   </style>
 </head>
 <body>
   <div class="container">
+    <div class="top-nav">
+      <button id="themeToggleBtn" onclick="toggleTheme()" class="theme-toggle-btn" aria-label="Toggle theme">
+        <span id="themeIcon">🌙</span> <span id="themeLabel">Dark Mode</span>
+      </button>
+    </div>
     <header>
       <div class="status-badge">
         <span class="status-dot"></span>
@@ -259,5 +325,38 @@
       </div>
     </div>
   </div>
+
+  <script>
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      const icon = document.getElementById('themeIcon');
+      const label = document.getElementById('themeLabel');
+      if (icon && label) {
+        if (theme === 'light') {
+          icon.textContent = '☀️';
+          label.textContent = 'Light Mode';
+        } else {
+          icon.textContent = '🌙';
+          label.textContent = 'Dark Mode';
+        }
+      }
+      try {
+        localStorage.setItem('app-theme', theme);
+      } catch (e) {}
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme') || 'dark';
+      applyTheme(current === 'dark' ? 'light' : 'dark');
+    }
+
+    // Init theme from localStorage
+    try {
+      const saved = localStorage.getItem('app-theme') || 'dark';
+      applyTheme(saved);
+    } catch (e) {
+      applyTheme('dark');
+    }
+  </script>
 </body>
 </html>

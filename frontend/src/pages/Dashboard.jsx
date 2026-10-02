@@ -7,6 +7,7 @@ import MultimodalPanel from '../components/MultimodalPanel';
 import DisasterModePanel from '../components/DisasterModePanel';
 import CaseStudySelector from '../components/CaseStudySelector';
 import MLRiskSimulator from '../components/MLRiskSimulator';
+import ThemeToggle from '../components/ThemeToggle';
 import { getVillages, getRiskAssessment, getActiveRoutes, getCorridors, getMultimodalModes } from '../services/api';
 
 const Dashboard = () => {
@@ -135,8 +136,8 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Agency Quick Switcher & Active Corridor Indicator */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        {/* Agency Quick Switcher, Light/Dark Mode Toggle & Actions */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
           <button
             onClick={() => setIsDisasterMode(!isDisasterMode)}
             style={{
@@ -156,6 +157,9 @@ const Dashboard = () => {
           >
             <span>{isDisasterMode ? '🔴 Crisis Mode Active' : '🚨 Disaster Management Mode'}</span>
           </button>
+
+          {/* Light / Dark Mode Toggle in Top Right */}
+          <ThemeToggle />
         </div>
       </header>
 
