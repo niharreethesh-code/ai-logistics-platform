@@ -63,8 +63,20 @@ const objectivesList = [
   }
 ];
 
-const Dashboard = ({ onNavigateToRiskEngine, onNavigateToHelpdesk, onNavigateToFunding }) => {
-  const [activeTab, setActiveTab] = useState('ALL'); // 'ALL' | 'OBJ_01' | 'OBJ_02' | 'OBJ_03' | 'OBJ_04' | 'OBJ_05' | 'OBJ_06' | 'GIS_MAP'
+const Dashboard = ({
+  initialTab = 'ALL',
+  onNavigateToRiskEngine,
+  onNavigateToHelpdesk,
+  onNavigateToFunding
+}) => {
+  const [activeTab, setActiveTab] = useState(initialTab);
+
+  useEffect(() => {
+    if (initialTab) {
+      setActiveTab(initialTab);
+    }
+  }, [initialTab]);
+
   const [isDisasterMode, setIsDisasterMode] = useState(false);
   const [activeMode, setActiveMode] = useState('drone'); // 'road' | 'rail' | 'waterway' | 'drone'
 
