@@ -73,8 +73,8 @@ function AppContent() {
             <div style={{ fontWeight: 800, fontSize: '1.05rem', letterSpacing: '-0.02em', color: isDark ? '#f8fafc' : '#0f172a' }}>
               AI-LOGIX <span style={{ color: '#38bdf8' }}>PLATFORM</span>
             </div>
-            <div style={{ fontSize: '0.68rem', color: '#94a3b8', lineHeight: 1 }}>
-              NCET CSE (22CSP57) • Rural Connectivity & Disaster Relief
+            <div style={{ fontSize: '0.68rem', color: isDark ? '#94a3b8' : '#334155', lineHeight: 1, fontWeight: 600 }}>
+              AI-LOGIX Enterprise • National Rural Connectivity & Emergency Relief Grid
             </div>
           </div>
         </div>

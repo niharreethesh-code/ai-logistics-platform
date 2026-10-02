@@ -19,7 +19,7 @@
    [Page 3] Platform Helpdesk & Doubts Knowledge Center:
             http://localhost:5173/#helpdesk
             (Features: Ask-a-doubt AI assistant, formula references, 
-             curriculum FAQ for NCET Dept of CSE Mini Project 22CSP57)
+             technical FAQ and architecture documentation for AI-Logistics)
 
 2. BACKEND API SERVER & STATUS
    -------------------------------------------------------------------------

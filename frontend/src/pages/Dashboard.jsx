@@ -180,7 +180,7 @@ const Dashboard = ({ onNavigateToRiskEngine, onNavigateToHelpdesk }) => {
               </span>
             </div>
             <p style={{ margin: '2px 0 0 0', color: '#94a3b8', fontSize: '0.85rem' }}>
-              Mini Project (22CSP57) • Dept. of CSE, Nagarjuna College of Engineering and Technology (NCET)
+              Autonomous Multi-Modal Rural Logistics Orchestration & Emergency Disaster Relief Platform
             </p>
           </div>
         </div>
@@ -216,7 +216,7 @@ const Dashboard = ({ onNavigateToRiskEngine, onNavigateToHelpdesk }) => {
       <div style={{ marginBottom: '1.5rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
           <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#f8fafc', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-            🎯 Core Project Objectives (22CSP57 Roadmap)
+            🎯 Platform Core Objectives & Operational Modules
           </span>
           <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
             Click any card to filter view to that objective
@@ -481,7 +481,7 @@ const Dashboard = ({ onNavigateToRiskEngine, onNavigateToHelpdesk }) => {
         </div>
       )}
 
-      {/* Footer with NCET Project Attribution */}
+      {/* Footer Attribution */}
       <footer style={{
         marginTop: '2.5rem',
         paddingTop: '1.25rem',
@@ -495,7 +495,7 @@ const Dashboard = ({ onNavigateToRiskEngine, onNavigateToHelpdesk }) => {
         gap: '0.5rem'
       }}>
         <div>
-          <strong>AI-Driven Multi-Modal Logistics & Risk Platform</strong> • Mini Project (22CSP57) • Dept. of CSE, NCET
+          <strong>AI-Driven Multi-Modal Logistics & Risk Platform</strong> • National Emergency & Rural Supply Chain Network
         </div>
         <div>
           Objectives: 01 Unified Model • 02 ML Risk • 03 Village Score • 04 AI Mode Rec • 05 Agency Alerts • 06 Case Studies

@@ -1,5 +1,5 @@
 # AI-Driven Multi-Modal Rural Logistics & Disaster Management Platform
-**Mini Project (22CSP57) | Dept. of Computer Science & Engineering, NCET**
+**Autonomous Multi-Modal Rural Logistics & Emergency Disaster Management System**
 
 An intelligent, risk-aware multi-modal logistics orchestration platform designed for rural connectivity, border settlements, and emergency disaster relief operations.
 
@@ -15,7 +15,7 @@ An intelligent, risk-aware multi-modal logistics orchestration platform designed
 
 ---
 
-## Implementation of Core Objectives (22CSP57)
+## Implementation of Core Platform Objectives
 
 | Objective | Feature Implementation | Visual & Interactive Capability |
 | :--- | :--- | :--- |

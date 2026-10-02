@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const presetKnowledgeBase = {
   'objectives': {
-    title: 'The 6 Core Objectives of the Platform (22CSP57)',
+    title: 'The 6 Core Objectives of the Platform Framework',
     summary: 'The platform is engineered around 6 sequential objectives addressing rural connectivity and crisis supply chains:',
     details: [
       'Objective 01: Unified Data Model - Integrates Road, Rail, Waterway, and Air/Drone logistics schemas into a unified payload and telemetry format.',
@@ -57,8 +57,8 @@ const presetKnowledgeBase = {
 const initialDoubtsList = [
   {
     id: 1,
-    author: 'Prof. Rajesh K. (Evaluator)',
-    role: 'Faculty Evaluator',
+    author: 'Dr. Marcus Vance',
+    role: 'Chief Logistics Architect',
     question: 'How does Objective 04 handle cases where Cargo Drones cannot fly due to heavy winds (>50 km/h)?',
     answer: 'Objective 04 incorporates a Contingency Fallback Protocol: When wind speeds exceed safe VTOL operating thresholds (>45 km/h), the decision matrix automatically shifts cargo routing to 6x6 Amphibious Rescue Vehicles or fortified Feeder Rail terminals, ensuring uninterrupted mission continuity.',
     date: 'Today at 10:15 AM',
@@ -84,7 +84,7 @@ const HelpdeskPage = () => {
 
   // New Doubt Form State
   const [authorName, setAuthorName] = useState('');
-  const [userRole, setUserRole] = useState('Project Student');
+  const [userRole, setUserRole] = useState('Logistics Coordinator');
   const [selectedCategory, setSelectedCategory] = useState('General Query');
   const [newQuestion, setNewQuestion] = useState('');
   const [formFeedback, setFormFeedback] = useState(null);
@@ -118,7 +118,7 @@ const HelpdeskPage = () => {
     if (!newQuestion.trim()) return;
 
     // AI generated technical answer simulation
-    let autoAns = `Thank you for your question regarding ${selectedCategory}. In this platform (22CSP57), the architecture addresses this through unified data modeling and risk-weighted decision trees. Real-time telemetry is streamed via Port 5050 to keep latency under 120ms.`;
+    let autoAns = `Thank you for your question regarding ${selectedCategory}. In this platform architecture, the system addresses this through unified data modeling and risk-weighted decision trees. Real-time telemetry is streamed via Port 5050 to keep latency under 120ms.`;
     if (newQuestion.toLowerCase().includes('drone') || newQuestion.toLowerCase().includes('air')) {
       autoAns = 'The autonomous cargo drone layer operates on an octocopter VTOL schema handling payloads up to 150 kg with a maximum cruising speed of 95 km/h, bypassing 100% of surface mudslide impediments.';
     } else if (newQuestion.toLowerCase().includes('corridor') || newQuestion.toLowerCase().includes('case study')) {
@@ -165,7 +165,7 @@ const HelpdeskPage = () => {
               Platform Helpdesk & Doubts Knowledge Center
             </h1>
             <p style={{ margin: 0, color: '#94a3b8', fontSize: '0.85rem' }}>
-              Department of Computer Science & Engineering, Nagarjuna College of Engineering and Technology (NCET) • Mini Project (22CSP57)
+              AI-LOGIX Enterprise Support • System Architecture Documentation & Operations Helpdesk
             </p>
           </div>
         </div>
@@ -249,7 +249,7 @@ const HelpdeskPage = () => {
               fontSize: '0.72rem',
               fontWeight: 700
             }}>
-              NCET CSE Curriculum Verified (22CSP57)
+              Platform Standard Architecture (ISO 22301 Aligned)
             </span>
           </div>
 
@@ -320,7 +320,7 @@ const HelpdeskPage = () => {
               </label>
               <input
                 type="text"
-                placeholder="e.g. Nihar (Student / Evaluator)"
+                placeholder="e.g. Alex Morgan (Logistics Coordinator / Analyst)"
                 value={authorName}
                 onChange={(e) => setAuthorName(e.target.value)}
                 style={{
@@ -353,10 +353,10 @@ const HelpdeskPage = () => {
                     fontSize: '0.85rem'
                   }}
                 >
-                  <option value="Project Student">CSE Student (NCET)</option>
-                  <option value="Faculty Evaluator">Faculty Evaluator</option>
-                  <option value="NDRF Logistics Officer">NDRF / SDMA Officer</option>
-                  <option value="Research Scholar">Research Scholar</option>
+                  <option value="Logistics Coordinator">Logistics Coordinator</option>
+                  <option value="Operations Analyst">Operations Analyst</option>
+                  <option value="NDRF Logistics Officer">NDRF / SDMA Emergency Officer</option>
+                  <option value="System Architect">System Architect / Engineer</option>
                 </select>
               </div>
 
