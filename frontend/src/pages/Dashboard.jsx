@@ -8,6 +8,7 @@ import DisasterModePanel from '../components/DisasterModePanel';
 import CaseStudySelector from '../components/CaseStudySelector';
 import MLRiskSimulator from '../components/MLRiskSimulator';
 import ModeRecommendationEngine from '../components/ModeRecommendationEngine';
+import ObjectiveDeepDiveContent, { objectiveMetadata } from '../components/ObjectiveDeepDiveContent';
 import ThemeToggle from '../components/ThemeToggle';
 import { getVillages, getRiskAssessment, getActiveRoutes, getCorridors, getMultimodalModes } from '../services/api';
 
@@ -62,10 +63,24 @@ const objectivesList = [
   }
 ];
 
-const Dashboard = ({ onNavigateToRiskEngine, onNavigateToHelpdesk }) => {
-  const [activeTab, setActiveTab] = useState('ALL'); // 'ALL' | 'OBJ_01' | 'OBJ_02' | 'OBJ_03' | 'OBJ_04' | 'OBJ_05' | 'OBJ_06'
+const Dashboard = ({ onNavigateToRiskEngine, onNavigateToHelpdesk, onNavigateToFunding }) => {
+  const [activeTab, setActiveTab] = useState('ALL'); // 'ALL' | 'OBJ_01' | 'OBJ_02' | 'OBJ_03' | 'OBJ_04' | 'OBJ_05' | 'OBJ_06' | 'GIS_MAP'
   const [isDisasterMode, setIsDisasterMode] = useState(false);
   const [activeMode, setActiveMode] = useState('drone'); // 'road' | 'rail' | 'waterway' | 'drone'
+
+  const tabOrder = ['ALL', 'OBJ_01', 'OBJ_02', 'OBJ_03', 'OBJ_04', 'OBJ_05', 'OBJ_06', 'GIS_MAP'];
+  const goToNextObjective = () => {
+    const currentIdx = tabOrder.indexOf(activeTab);
+    const nextIdx = (currentIdx + 1) % tabOrder.length;
+    setActiveTab(tabOrder[nextIdx]);
+    window.scrollTo({ top: 320, behavior: 'smooth' });
+  };
+  const goToPrevObjective = () => {
+    const currentIdx = tabOrder.indexOf(activeTab);
+    const prevIdx = (currentIdx - 1 + tabOrder.length) % tabOrder.length;
+    setActiveTab(tabOrder[prevIdx]);
+    window.scrollTo({ top: 320, behavior: 'smooth' });
+  };
 
   // Corridors (Objective 06)
   const [corridors, setCorridors] = useState([]);
@@ -277,44 +292,87 @@ const Dashboard = ({ onNavigateToRiskEngine, onNavigateToHelpdesk }) => {
         </div>
       </div>
 
-      {/* Navigation Filter Tabs strictly in Order (ALL + 01 to 06) */}
+      {/* =========================================================================
+          DASHBOARD ASSESSMENT MENU BAR (Separating All Objectives with Dedicated Content)
+          ========================================================================= */}
       <div style={{
-        display: 'flex',
-        gap: '0.4rem',
-        marginBottom: '1.25rem',
-        flexWrap: 'wrap',
-        background: 'rgba(15, 23, 42, 0.75)',
-        padding: '6px',
-        borderRadius: '12px',
-        border: '1px solid rgba(255, 255, 255, 0.08)'
+        background: 'rgba(15, 23, 42, 0.88)',
+        border: '1px solid rgba(79, 110, 165, 0.35)',
+        borderRadius: '16px',
+        padding: '0.85rem 1.25rem',
+        marginBottom: '1.5rem',
+        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.35)'
       }}>
-        {[
-          { id: 'ALL', label: '🌐 All Objectives in Order' },
-          { id: 'OBJ_01', label: '01. Multi-Modal Model' },
-          { id: 'OBJ_02', label: '02. ML Disruption Risk' },
-          { id: 'OBJ_03', label: '03. Village Accessibility' },
-          { id: 'OBJ_04', label: '04. AI Mode Recommendation' },
-          { id: 'OBJ_05', label: '05. Disaster Planner Alerts' },
-          { id: 'OBJ_06', label: '06. Case-Study Corridors' }
-        ].map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            style={{
-              background: activeTab === tab.id ? '#38bdf8' : 'transparent',
-              color: activeTab === tab.id ? '#0f172a' : '#94a3b8',
-              border: 'none',
-              padding: '8px 12px',
-              borderRadius: '8px',
-              fontSize: '0.78rem',
-              fontWeight: 700,
-              cursor: 'pointer',
-              transition: 'all 0.15s ease'
-            }}
-          >
-            {tab.label}
-          </button>
-        ))}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px', flexWrap: 'wrap', gap: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ fontSize: '1.2rem' }}>🗂️</span>
+            <div>
+              <span style={{ fontSize: '0.84rem', fontWeight: 800, color: '#f8fafc', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                Dashboard Assessment Menu Bar (Separated Objectives)
+              </span>
+              <div style={{ fontSize: '0.7rem', color: '#94a3b8' }}>
+                Click any tab below to assess that objective on its own dedicated view with expanded technical content
+              </div>
+            </div>
+          </div>
+          <div style={{ fontSize: '0.74rem', color: '#94a3b8' }}>
+            Active Assessment View:{' '}
+            <strong style={{ color: '#38bdf8' }}>
+              {activeTab === 'ALL' && '🌐 Master Overview (All 6 Objectives in Sequential Order)'}
+              {activeTab === 'OBJ_01' && '🔄 Objective 01: Unified Multi-Modal Data Model'}
+              {activeTab === 'OBJ_02' && '🧠 Objective 02: ML Route-Level Disruption Risk Models'}
+              {activeTab === 'OBJ_03' && '🏘️ Objective 03: Village Accessibility Scoring System'}
+              {activeTab === 'OBJ_04' && '🎯 Objective 04: AI Route & Mode Recommendation Engine'}
+              {activeTab === 'OBJ_05' && '🚨 Objective 05: Agency Disaster Planner & Alerts'}
+              {activeTab === 'OBJ_06' && '🏔️ Objective 06: Contrasting Case-Study Corridors'}
+              {activeTab === 'GIS_MAP' && '🗺️ Geospatial GIS Route Operations Center'}
+            </strong>
+          </div>
+        </div>
+
+        {/* Separated Objectives Tabs Bar */}
+        <div style={{
+          display: 'flex',
+          gap: '6px',
+          flexWrap: 'wrap'
+        }}>
+          {[
+            { id: 'ALL', label: '🌐 Master Overview (All 6)', icon: '🌐' },
+            { id: 'OBJ_01', label: '01. Multi-Modal Model', icon: '🔄' },
+            { id: 'OBJ_02', label: '02. ML Disruption Risk', icon: '🧠' },
+            { id: 'OBJ_03', label: '03. Village Accessibility', icon: '🏘️' },
+            { id: 'OBJ_04', label: '04. AI Mode Rec Engine', icon: '🎯' },
+            { id: 'OBJ_05', label: '05. Disaster Planner Alerts', icon: '🚨' },
+            { id: 'OBJ_06', label: '06. Case-Study Corridors', icon: '🏔️' },
+            { id: 'GIS_MAP', label: 'GIS Operations Map', icon: '🗺️' }
+          ].map((tab) => {
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                style={{
+                  background: isActive ? '#0284c7' : 'rgba(255, 255, 255, 0.05)',
+                  color: isActive ? '#ffffff' : '#94a3b8',
+                  border: `1px solid ${isActive ? '#38bdf8' : 'rgba(255, 255, 255, 0.1)'}`,
+                  padding: '7px 13px',
+                  borderRadius: '8px',
+                  fontSize: '0.78rem',
+                  fontWeight: isActive ? 800 : 600,
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  transition: 'all 0.15s ease',
+                  boxShadow: isActive ? '0 2px 10px rgba(2, 132, 199, 0.4)' : 'none'
+                }}
+              >
+                <span>{tab.icon}</span>
+                <span>{tab.label}</span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* Alert Banner */}
@@ -397,67 +455,239 @@ const Dashboard = ({ onNavigateToRiskEngine, onNavigateToHelpdesk }) => {
       </div>
 
       {/* =========================================================================
-          OBJECTIVES RENDERED STRICTLY IN ORDER: 01 -> 02 -> 03 -> 04 -> 05 -> 06
+          MODE A: SEPARATED OBJECTIVE ASSESSMENT VIEW (WITH EXPANDED CONTENT)
           ========================================================================= */}
-
-      {/* OBJECTIVE 01: UNIFIED DATA MODEL */}
-      {(activeTab === 'ALL' || activeTab === 'OBJ_01') && (
-        <MultimodalPanel
-          modes={multimodalModes}
-          activeMode={activeMode}
-          onSelectMode={setActiveMode}
-        />
-      )}
-
-      {/* OBJECTIVE 02: ML DISRUPTION RISK ENGINE */}
-      {(activeTab === 'ALL' || activeTab === 'OBJ_02') && (
-        <div>
-          <MLRiskSimulator />
-        </div>
-      )}
-
-      {/* OBJECTIVE 03: VILLAGE ACCESSIBILITY SCORING */}
-      {(activeTab === 'ALL' || activeTab === 'OBJ_03') && (
-        <div>
-          <VillageTable
-            villages={villages}
-            selectedVillage={selectedVillage}
-            onSelectVillage={setSelectedVillage}
+      {activeTab !== 'ALL' && activeTab !== 'GIS_MAP' && (
+        <div style={{ marginBottom: '2rem' }}>
+          {/* Expanded Mathematical, Architectural & Operational Content */}
+          <ObjectiveDeepDiveContent
+            objectiveId={activeTab}
+            onNavigateToRiskEngine={onNavigateToRiskEngine}
+            onNavigateToFunding={onNavigateToFunding}
           />
+
+          {/* Interactive Simulation Sandbox */}
+          <div style={{
+            background: 'rgba(15, 23, 42, 0.75)',
+            border: '1px solid rgba(79, 110, 165, 0.3)',
+            borderRadius: '16px',
+            padding: '1.5rem',
+            marginBottom: '1.5rem'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '8px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ fontSize: '1.3rem' }}>⚡</span>
+                <h3 style={{ margin: 0, color: '#f8fafc', fontWeight: 800 }}>
+                  Interactive Objective Assessment Module & Telemetry
+                </h3>
+              </div>
+              <span style={{
+                background: 'rgba(16, 185, 129, 0.15)',
+                color: '#34d399',
+                border: '1px solid rgba(16, 185, 129, 0.3)',
+                padding: '3px 10px',
+                borderRadius: '6px',
+                fontSize: '0.72rem',
+                fontWeight: 700
+              }}>
+                Live Interactive Mode
+              </span>
+            </div>
+
+            {activeTab === 'OBJ_01' && (
+              <MultimodalPanel
+                modes={multimodalModes}
+                activeMode={activeMode}
+                onSelectMode={setActiveMode}
+              />
+            )}
+
+            {activeTab === 'OBJ_02' && (
+              <div>
+                <div style={{ marginBottom: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
+                  <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>
+                    Adjust live rainfall intensity, wind gusts, and terrain elevation below to observe failure probability shifts:
+                  </span>
+                  {onNavigateToRiskEngine && (
+                    <button
+                      onClick={onNavigateToRiskEngine}
+                      style={{
+                        background: 'rgba(16, 185, 129, 0.15)',
+                        border: '1px solid #10b981',
+                        color: '#34d399',
+                        padding: '6px 14px',
+                        borderRadius: '8px',
+                        fontSize: '0.78rem',
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px'
+                      }}
+                    >
+                      <span>Open Full Drag-and-Drop Coordinate Engine</span>
+                      <span>↗</span>
+                    </button>
+                  )}
+                </div>
+                <MLRiskSimulator />
+              </div>
+            )}
+
+            {activeTab === 'OBJ_03' && (
+              <div>
+                <div style={{ marginBottom: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
+                  <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>
+                    Settlement vulnerability scoring across seasonal cutoffs, health facility proximity, and border tags:
+                  </span>
+                  {onNavigateToFunding && (
+                    <button
+                      onClick={onNavigateToFunding}
+                      style={{
+                        background: 'rgba(239, 68, 68, 0.15)',
+                        border: '1px solid #ef4444',
+                        color: '#fca5a5',
+                        padding: '6px 14px',
+                        borderRadius: '8px',
+                        fontSize: '0.78rem',
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px'
+                      }}
+                    >
+                      <span>❤️ Fund Emergency Medical Supplies for Cutoff Villages</span>
+                      <span>→</span>
+                    </button>
+                  )}
+                </div>
+                <VillageTable
+                  villages={villages}
+                  selectedVillage={selectedVillage}
+                  onSelectVillage={setSelectedVillage}
+                />
+              </div>
+            )}
+
+            {activeTab === 'OBJ_04' && (
+              <ModeRecommendationEngine onSelectMode={setActiveMode} />
+            )}
+
+            {activeTab === 'OBJ_05' && (
+              <DisasterModePanel
+                isDisasterMode={isDisasterMode}
+                onToggleDisasterMode={() => setIsDisasterMode(!isDisasterMode)}
+              />
+            )}
+
+            {activeTab === 'OBJ_06' && (
+              <CaseStudySelector
+                corridors={corridors}
+                selectedCorridor={selectedCorridor}
+                onSelectCorridor={handleSelectCorridor}
+              />
+            )}
+          </div>
+
+          {/* Separated Objectives Navigation Footer */}
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingTop: '1rem',
+            borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+            flexWrap: 'wrap',
+            gap: '10px'
+          }}>
+            <button
+              onClick={goToPrevObjective}
+              style={{
+                background: 'rgba(255, 255, 255, 0.06)',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+                color: '#f8fafc',
+                borderRadius: '8px',
+                padding: '8px 16px',
+                fontSize: '0.8rem',
+                fontWeight: 700,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px'
+              }}
+            >
+              <span>◀</span>
+              <span>Previous Assessment Tab</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab('ALL')}
+              style={{
+                background: 'transparent',
+                border: '1px solid rgba(56, 189, 248, 0.3)',
+                color: '#38bdf8',
+                borderRadius: '8px',
+                padding: '8px 16px',
+                fontSize: '0.8rem',
+                fontWeight: 700,
+                cursor: 'pointer'
+              }}
+            >
+              🌐 Return to Master Overview (All Objectives)
+            </button>
+
+            <button
+              onClick={goToNextObjective}
+              style={{
+                background: 'linear-gradient(135deg, #0284c7 0%, #0369a1 100%)',
+                border: '1px solid rgba(56, 189, 248, 0.5)',
+                color: '#ffffff',
+                borderRadius: '8px',
+                padding: '8px 18px',
+                fontSize: '0.8rem',
+                fontWeight: 700,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                boxShadow: '0 2px 10px rgba(2, 132, 199, 0.4)'
+              }}
+            >
+              <span>Next Assessment Tab</span>
+              <span>▶</span>
+            </button>
+          </div>
         </div>
       )}
 
-      {/* OBJECTIVE 04: AI-DRIVEN ROUTE & MODE RECOMMENDATION ENGINE */}
-      {(activeTab === 'ALL' || activeTab === 'OBJ_04') && (
-        <div style={{ marginTop: activeTab === 'ALL' ? '1.5rem' : '0' }}>
-          <ModeRecommendationEngine onSelectMode={setActiveMode} />
-        </div>
-      )}
+      {/* =========================================================================
+          MODE B: GIS OPERATIONS CENTER SEPARATED VIEW
+          ========================================================================= */}
+      {activeTab === 'GIS_MAP' && (
+        <div style={{ marginBottom: '2rem' }}>
+          <div style={{
+            background: 'linear-gradient(135deg, rgba(2, 132, 199, 0.15) 0%, rgba(99, 102, 241, 0.15) 100%)',
+            border: '1.5px solid rgba(56, 189, 248, 0.4)',
+            borderRadius: '16px',
+            padding: '1.5rem',
+            marginBottom: '1.5rem'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+              <span style={{ fontSize: '1.8rem' }}>🗺️</span>
+              <div>
+                <div style={{ fontSize: '0.72rem', color: '#38bdf8', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                  Geospatial Operations & Telemetry Center
+                </div>
+                <h2 style={{ margin: '2px 0 0 0', fontSize: '1.35rem', fontWeight: 800, color: '#f8fafc' }}>
+                  Live Spatial GIS Tracking Canvas & Elevation Profiles
+                </h2>
+              </div>
+            </div>
+            <p style={{ margin: '6px 0 0 0', fontSize: '0.88rem', color: '#cbd5e1', lineHeight: 1.5 }}>
+              Visualizes real-time route flows, terrain topography elevation profiles, and settlement cutoff telemetry. Click on any village pin to calculate live transit risk vectors.
+            </p>
+          </div>
 
-      {/* OBJECTIVE 05: PLANNER DASHBOARD WITH DISASTER ALERTS */}
-      {(activeTab === 'ALL' || activeTab === 'OBJ_05' || isDisasterMode) && (
-        <div style={{ marginTop: activeTab === 'ALL' ? '1.5rem' : '0' }}>
-          <DisasterModePanel
-            isDisasterMode={isDisasterMode}
-            onToggleDisasterMode={() => setIsDisasterMode(!isDisasterMode)}
-          />
-        </div>
-      )}
-
-      {/* OBJECTIVE 06: CONTRASTING CASE-STUDY CORRIDORS */}
-      {(activeTab === 'ALL' || activeTab === 'OBJ_06') && (
-        <div style={{ marginTop: activeTab === 'ALL' ? '1.5rem' : '0' }}>
-          <CaseStudySelector
-            corridors={corridors}
-            selectedCorridor={selectedCorridor}
-            onSelectCorridor={handleSelectCorridor}
-          />
-        </div>
-      )}
-
-      {/* GEOSPATIAL MAP VIEW & ROUTE TELEMETRY (Visual Ops Center) */}
-      {activeTab === 'ALL' && (
-        <div style={{ marginTop: '1.5rem' }}>
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'minmax(0, 1.8fr) minmax(0, 1fr)',
@@ -472,10 +702,161 @@ const Dashboard = ({ onNavigateToRiskEngine, onNavigateToHelpdesk }) => {
                 routes={routes}
               />
             </div>
-
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               <RiskPanel riskData={riskData} selectedVillage={selectedVillage} />
               <RoutePanel routes={routes} onOptimize={handleOptimizeRoute} />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* =========================================================================
+          MODE C: MASTER OVERVIEW (ALL 6 OBJECTIVES IN STRICT SEQUENTIAL ORDER)
+          ========================================================================= */}
+      {activeTab === 'ALL' && (
+        <div>
+          {/* OBJECTIVE 01: UNIFIED DATA MODEL */}
+          <div style={{ marginBottom: '1.75rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.6rem' }}>
+              <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#38bdf8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                🔄 Objective 01: Unified Multi-Modal Data Model
+              </span>
+              <button
+                onClick={() => setActiveTab('OBJ_01')}
+                style={{ background: 'transparent', border: 'none', color: '#38bdf8', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 700 }}
+              >
+                Inspect on Dedicated Tab ↗
+              </button>
+            </div>
+            <MultimodalPanel
+              modes={multimodalModes}
+              activeMode={activeMode}
+              onSelectMode={setActiveMode}
+            />
+          </div>
+
+          {/* OBJECTIVE 02: ML DISRUPTION RISK ENGINE */}
+          <div style={{ marginBottom: '1.75rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.6rem' }}>
+              <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#10b981', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                🧠 Objective 02: ML Route-Level Disruption Risk Models
+              </span>
+              <button
+                onClick={() => setActiveTab('OBJ_02')}
+                style={{ background: 'transparent', border: 'none', color: '#10b981', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 700 }}
+              >
+                Inspect on Dedicated Tab ↗
+              </button>
+            </div>
+            <MLRiskSimulator />
+          </div>
+
+          {/* OBJECTIVE 03: VILLAGE ACCESSIBILITY SCORING */}
+          <div style={{ marginBottom: '1.75rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.6rem' }}>
+              <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#818cf8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                🏘️ Objective 03: Village Accessibility Scoring System
+              </span>
+              <button
+                onClick={() => setActiveTab('OBJ_03')}
+                style={{ background: 'transparent', border: 'none', color: '#818cf8', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 700 }}
+              >
+                Inspect on Dedicated Tab ↗
+              </button>
+            </div>
+            <VillageTable
+              villages={villages}
+              selectedVillage={selectedVillage}
+              onSelectVillage={setSelectedVillage}
+            />
+          </div>
+
+          {/* OBJECTIVE 04: AI ROUTE & MODE RECOMMENDATION ENGINE */}
+          <div style={{ marginBottom: '1.75rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.6rem' }}>
+              <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#059669', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                🎯 Objective 04: AI Route & Mode Recommendation Engine
+              </span>
+              <button
+                onClick={() => setActiveTab('OBJ_04')}
+                style={{ background: 'transparent', border: 'none', color: '#059669', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 700 }}
+              >
+                Inspect on Dedicated Tab ↗
+              </button>
+            </div>
+            <ModeRecommendationEngine onSelectMode={setActiveMode} />
+          </div>
+
+          {/* OBJECTIVE 05: PLANNER DASHBOARD WITH DISASTER ALERTS */}
+          <div style={{ marginBottom: '1.75rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.6rem' }}>
+              <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#f43f5e', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                🚨 Objective 05: Planner Dashboard with Disaster Alerts
+              </span>
+              <button
+                onClick={() => setActiveTab('OBJ_05')}
+                style={{ background: 'transparent', border: 'none', color: '#f43f5e', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 700 }}
+              >
+                Inspect on Dedicated Tab ↗
+              </button>
+            </div>
+            <DisasterModePanel
+              isDisasterMode={isDisasterMode}
+              onToggleDisasterMode={() => setIsDisasterMode(!isDisasterMode)}
+            />
+          </div>
+
+          {/* OBJECTIVE 06: CONTRASTING CASE-STUDY CORRIDORS */}
+          <div style={{ marginBottom: '1.75rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.6rem' }}>
+              <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#f59e0b', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                🏔️ Objective 06: Contrasting Case-Study Corridors
+              </span>
+              <button
+                onClick={() => setActiveTab('OBJ_06')}
+                style={{ background: 'transparent', border: 'none', color: '#f59e0b', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 700 }}
+              >
+                Inspect on Dedicated Tab ↗
+              </button>
+            </div>
+            <CaseStudySelector
+              corridors={corridors}
+              selectedCorridor={selectedCorridor}
+              onSelectCorridor={handleSelectCorridor}
+            />
+          </div>
+
+          {/* GEOSPATIAL MAP VIEW & ROUTE TELEMETRY */}
+          <div style={{ marginTop: '2rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.6rem' }}>
+              <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#38bdf8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                🗺️ Geospatial Network Operations Canvas & Live Route Telemetry
+              </span>
+              <button
+                onClick={() => setActiveTab('GIS_MAP')}
+                style={{ background: 'transparent', border: 'none', color: '#38bdf8', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 700 }}
+              >
+                Open Fullscreen GIS View ↗
+              </button>
+            </div>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'minmax(0, 1.8fr) minmax(0, 1fr)',
+              gap: '1.5rem',
+              alignItems: 'start'
+            }}>
+              <div>
+                <MapView
+                  villages={villages}
+                  selectedVillage={selectedVillage}
+                  onSelectVillage={setSelectedVillage}
+                  routes={routes}
+                />
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                <RiskPanel riskData={riskData} selectedVillage={selectedVillage} />
+                <RoutePanel routes={routes} onOptimize={handleOptimizeRoute} />
+              </div>
             </div>
           </div>
         </div>

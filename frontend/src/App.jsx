@@ -2,17 +2,19 @@ import React, { useState, useEffect } from 'react';
 import Dashboard from './pages/Dashboard';
 import MLRiskEnginePage from './pages/MLRiskEnginePage';
 import HelpdeskPage from './pages/HelpdeskPage';
+import MedicalSupplyFundingPage from './pages/MedicalSupplyFundingPage';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import ThemeToggle from './components/ThemeToggle';
 
 function AppContent() {
   const { isDark } = useTheme();
 
-  // Three-Way Page Navigation: 'DASHBOARD' | 'RISK_ENGINE' | 'HELPDESK'
+  // Multi-Page Navigation: 'DASHBOARD' | 'RISK_ENGINE' | 'HELPDESK' | 'MEDICAL_FUNDING'
   const [currentPage, setCurrentPage] = useState(() => {
     const hash = window.location.hash.toLowerCase();
     if (hash === '#risk-engine' || hash === '#ml-risk-engine') return 'RISK_ENGINE';
     if (hash === '#helpdesk' || hash === '#doubts') return 'HELPDESK';
+    if (hash === '#fund-supplies' || hash === '#signup' || hash === '#medical-funding') return 'MEDICAL_FUNDING';
     return 'DASHBOARD';
   });
 
@@ -21,6 +23,7 @@ function AppContent() {
       const hash = window.location.hash.toLowerCase();
       if (hash === '#risk-engine' || hash === '#ml-risk-engine') setCurrentPage('RISK_ENGINE');
       else if (hash === '#helpdesk' || hash === '#doubts') setCurrentPage('HELPDESK');
+      else if (hash === '#fund-supplies' || hash === '#signup' || hash === '#medical-funding') setCurrentPage('MEDICAL_FUNDING');
       else setCurrentPage('DASHBOARD');
     };
 
@@ -32,6 +35,7 @@ function AppContent() {
     setCurrentPage(page);
     if (page === 'RISK_ENGINE') window.location.hash = 'risk-engine';
     else if (page === 'HELPDESK') window.location.hash = 'helpdesk';
+    else if (page === 'MEDICAL_FUNDING') window.location.hash = 'fund-supplies';
     else window.location.hash = 'dashboard';
   };
 
@@ -46,7 +50,7 @@ function AppContent() {
         transition: 'background-color 0.25s ease, color 0.25s ease'
       }}
     >
-      {/* Top 3-Way Global Navigation Bar */}
+      {/* Top Main Navigation Bar */}
       <nav style={{
         position: 'sticky',
         top: 0,
@@ -63,7 +67,7 @@ function AppContent() {
         gap: '0.75rem',
         boxShadow: isDark ? '0 4px 20px rgba(0, 0, 0, 0.4)' : '0 2px 10px rgba(0, 0, 0, 0.05)'
       }}>
-        {/* Logo and Academic Attribution */}
+        {/* Logo and Platform Title */}
         <div
           onClick={() => navigateTo('DASHBOARD')}
           style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}
@@ -79,14 +83,15 @@ function AppContent() {
           </div>
         </div>
 
-        {/* The 3-Way Main Navigation Controls */}
+        {/* Main Navigation Tabs */}
         <div style={{
           display: 'flex',
           gap: '6px',
           background: isDark ? 'rgba(15, 23, 42, 0.85)' : 'rgba(241, 245, 249, 0.9)',
           padding: '4px',
           borderRadius: '12px',
-          border: `1px solid ${isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(203, 213, 225, 0.8)'}`
+          border: `1px solid ${isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(203, 213, 225, 0.8)'}`,
+          flexWrap: 'wrap'
         }}>
           <button
             onClick={() => navigateTo('DASHBOARD')}
@@ -95,7 +100,7 @@ function AppContent() {
               color: currentPage === 'DASHBOARD' ? '#ffffff' : isDark ? '#94a3b8' : '#475569',
               border: 'none',
               borderRadius: '8px',
-              padding: '8px 16px',
+              padding: '8px 14px',
               fontSize: '0.82rem',
               fontWeight: 700,
               cursor: 'pointer',
@@ -107,7 +112,7 @@ function AppContent() {
             }}
           >
             <span>📊</span>
-            <span>1. Unified Dashboard (All 6 Objectives)</span>
+            <span>1. Dashboard (All 6 Objectives)</span>
           </button>
 
           <button
@@ -117,7 +122,7 @@ function AppContent() {
               color: currentPage === 'RISK_ENGINE' ? '#ffffff' : isDark ? '#94a3b8' : '#475569',
               border: 'none',
               borderRadius: '8px',
-              padding: '8px 16px',
+              padding: '8px 14px',
               fontSize: '0.82rem',
               fontWeight: 700,
               cursor: 'pointer',
@@ -139,7 +144,7 @@ function AppContent() {
               color: currentPage === 'HELPDESK' ? '#ffffff' : isDark ? '#94a3b8' : '#475569',
               border: 'none',
               borderRadius: '8px',
-              padding: '8px 16px',
+              padding: '8px 14px',
               fontSize: '0.82rem',
               fontWeight: 700,
               cursor: 'pointer',
@@ -153,6 +158,28 @@ function AppContent() {
             <span>💬</span>
             <span>3. Helpdesk & Doubts</span>
           </button>
+
+          <button
+            onClick={() => navigateTo('MEDICAL_FUNDING')}
+            style={{
+              background: currentPage === 'MEDICAL_FUNDING' ? '#059669' : 'rgba(16, 185, 129, 0.12)',
+              color: currentPage === 'MEDICAL_FUNDING' ? '#ffffff' : isDark ? '#34d399' : '#047857',
+              border: `1.5px solid ${currentPage === 'MEDICAL_FUNDING' ? '#10b981' : 'rgba(16, 185, 129, 0.45)'}`,
+              borderRadius: '8px',
+              padding: '8px 16px',
+              fontSize: '0.82rem',
+              fontWeight: 800,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              transition: 'all 0.2s ease',
+              boxShadow: currentPage === 'MEDICAL_FUNDING' ? '0 2px 14px rgba(16, 185, 129, 0.45)' : 'none'
+            }}
+          >
+            <span>❤️</span>
+            <span>4. Fund Medical Supplies (Sign Up)</span>
+          </button>
         </div>
 
         {/* Top Right Controls (Theme Toggle) */}
@@ -161,16 +188,18 @@ function AppContent() {
         </div>
       </nav>
 
-      {/* Render Active View from the 3-Way Pages */}
+      {/* Render Active View */}
       <main>
         {currentPage === 'DASHBOARD' && (
           <Dashboard
             onNavigateToRiskEngine={() => navigateTo('RISK_ENGINE')}
             onNavigateToHelpdesk={() => navigateTo('HELPDESK')}
+            onNavigateToFunding={() => navigateTo('MEDICAL_FUNDING')}
           />
         )}
         {currentPage === 'RISK_ENGINE' && <MLRiskEnginePage />}
         {currentPage === 'HELPDESK' && <HelpdeskPage />}
+        {currentPage === 'MEDICAL_FUNDING' && <MedicalSupplyFundingPage />}
       </main>
     </div>
   );
